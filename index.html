@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="chronosApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./node_modules/bootstrap3/dist/css/bootstrap.min.css">
+    <title>Chronos</title>
+    
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <a href="#!/" class="navbar-brand">Chronos</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#!/time-entry-list">Time Entries</a></li>
+            <li><a href="#!/new-time-entry">Create New</a></li>
+        </ul>
+    </nav>
+
+    <div ng-view></div>
+
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/angular-route/angular-route.js"></script>
+    <script src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="./chronos.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<form action="" class="form">
+    <div class="form-group">
+        <label for="">Title</label>
+        <input type="text" class="form-control" placeholder="What is this time entry for">
+    </div>
+
+    <button class="btn btn-success" ng-if="$ctrl.mode == 'create'">Create</button>
+    <button class="btn btn-primary" ng-if="$ctrl.mode == 'edit'">Update</button>
+</form>
