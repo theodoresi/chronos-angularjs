@@ -20,10 +20,22 @@ chronosApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 /**
- * Create service
+ * Data service
+ */
+chronosApp.service('dataService', ['$http', function($http) {
+    this.timeEntryUrl = 'http://localhost:5000/api/time_entry';
+    this.getTimeEntryList = function() {
+        return $http.get(this.timeEntryUrl);
+    }
+}]);
+
+/**
+ * Chronos Service
  */
 chronosApp.service('chronosService', ['$http', function($http) {
-
+    this.catchError = function() {
+        console.log('Something goes wrong');
+    }
 }]);
 
 /**
@@ -31,8 +43,15 @@ chronosApp.service('chronosService', ['$http', function($http) {
  */
 chronosApp.component('timeEntryList', {
     templateUrl: 'templates/time-entry-list.template.html',
-    controller: ['$scope', 'chronosService', function($scope, chronosService) {
-        let self = this;
+    controller: ['$scope', 'dataService', 'chronosService',
+        function($scope, dataService, chronosService) {
+            let self = this;
+            self.timeEntries = null;
+
+
+            dataService.getTimeEntryList().then(function(resp) {
+                self.timeEntries = resp.data;
+            }).catch(chronosService.catchError);
     }]
 });
 
@@ -41,11 +60,27 @@ chronosApp.component('timeEntryList', {
  */
 chronosApp.component('timeEntryDetail', {
     templateUrl: 'templates/time-entry-detail.template.html',
-    controller: ['$scope', '$routeParams', 'chronosService', function($scope, $routeParams, chronosService) {
+    controller: ['$scope', '$routeParams', 'dataService', function($scope, $routeParams, dataService) {
         let self = this;
-        self.id = $routeParams.id;
+        self.switchMode = function(newMode) {
+            self.mode = newMode;
+        }
+
+        self.editTimeEntry = function() {
+            self.switchMode('edit');
+        }
+
+        self.saveTimeEntry = function() {
+            self.switchMode('view');
+            
+        }
+
+        self.createTimeEntry = function() {
+            self.switchMode('view');
+        }
     }],
     bindings: {
-        mode: '@'
+        mode: '@',
+        timeEntry: '<'
     }
 });

@@ -1,1 +1,6 @@
-<p>This is the time entry list</p>
+<div class="row">
+    <div class="col-md-3 col-sm-4" ng-repeat="timeEntry in $ctrl.timeEntries">
+        <!-- Note time-entry is a Input for time-entry-detail component (timeEntry in bindings) -->
+        <time-entry-detail mode="view" time-entry="timeEntry"></time-entry-detail>
+    </div>
+</div>
