@@ -8,18 +8,63 @@
         <form action="" class="form">
             <div class="form-group">
                 <label for="">Title</label>
-                <input type="text" class="form-control" placeholder="What is this entry about">
+                <input type="text" class="form-control" placeholder="What is this entry about"
+                    ng-model="$ctrl.timeEntry.title"
+                    ng-readonly="$ctrl.mode == 'view'">
             </div>
             <div class="form-group">
                 <label for="">Category</label>
-                <input type="text" class="form-control" placeholder="">
+                <input type="text" class="form-control" ng-model="$ctrl.timeEntry.category"
+                    ng-readonly="$ctrl.mode == 'view'">
             </div>
+            <!-- Tags -->
+            <div class="form-group"></div>
+
+            <!-- Start time -->
+            <div class="form-group">
+                <label for="">Start</label>
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                        uib-datepicker-popup is-open="$ctrl.isStartedAtOpen"
+                        ng-model="$ctrl.timeEntry.started_at_date"
+                        ng-readonly="$ctrl.mode == 'view'">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default"
+                            ng-click="$ctrl.openStartedAt()"><i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </div>
+                </div>
+                <div uib-timepicker ng-model="$ctrl.timeEntry.started_at_time"
+                    hour-step="1" minute-step="1" show-meridian="'ismeridian'">
+                </div>
+            </div>
+            <!-- End time -->
+            <div class="form-group">
+                <label for="">End</label>
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                        uib-datepicker-popup is-open="$ctrl.isEndedAtOpen"
+                        ng-model="$ctrl.timeEntry.ended_at_date"
+                        ng-readonly="$ctrl.mode == 'view'">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default"
+                            ng-click="$ctrl.openEndedAt()"><i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </div>
+                </div>
+                <div uib-timepicker ng-model="$ctrl.timeEntry.ended_at_time"
+                    hour-step="1" minute-step="1" show-meridian="'ismeridian'">
+                </div>
+            </div>
+
+            
         </form>
     </div>
     <div class="panel-footer">
         <button ng-if="$ctrl.mode == 'view'" class="btn btn-primary" ng-click="$ctrl.editTimeEntry()">Edit</button>
         <button ng-if="$ctrl.mode == 'edit'" class="btn btn-success" ng-click="$ctrl.saveTimeEntry()">Save</button>
         <button ng-if="$ctrl.mode == 'create'" class="btn btn-success" ng-click="$ctrl.createTimeEntry()">Create</button>
-        <button class="btn btn-default">Cancel</button>
+        <button class="btn btn-default" ng-if="$ctrl.mode == 'edit'"
+            ng-click="$ctrl.cancel()">Cancel</button>
     </div>
 </div>

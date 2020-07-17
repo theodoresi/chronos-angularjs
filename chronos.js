@@ -1,4 +1,4 @@
-let chronosApp = angular.module('chronosApp', ['ngRoute']);
+let chronosApp = angular.module('chronosApp', ['ngRoute', 'ui.bootstrap']);
 
 /**
  * Configure routing
@@ -48,9 +48,25 @@ chronosApp.component('timeEntryList', {
             let self = this;
             self.timeEntries = null;
 
+            self.processTimeEntry = function(entry) {
+                // Get the date & time part of started_at and ended_at
+                entry.started_at_date = new Date(2020, 3, 4);
+                    entry.ended_at_date = new Date(2020, 3, 4);
+
+                    entry.started_at_time = new Date();
+                    entry.started_at_time.setHours(12);
+                    entry.started_at_time.setMinutes(12);
+
+                    entry.ended_at_time = new Date();
+                    entry.ended_at_time.setHours(12);
+                    entry.ended_at_time.setMinutes(12);
+            }
 
             dataService.getTimeEntryList().then(function(resp) {
                 self.timeEntries = resp.data;
+                for (let entry of self.timeEntries) {
+                    self.processTimeEntry(entry);
+                }
             }).catch(chronosService.catchError);
     }]
 });
@@ -62,6 +78,9 @@ chronosApp.component('timeEntryDetail', {
     templateUrl: 'templates/time-entry-detail.template.html',
     controller: ['$scope', '$routeParams', 'dataService', function($scope, $routeParams, dataService) {
         let self = this;
+        self.isStartedAtOpen = false;
+        self.isEndedAtOpen = false;
+
         self.switchMode = function(newMode) {
             self.mode = newMode;
         }
@@ -77,6 +96,17 @@ chronosApp.component('timeEntryDetail', {
 
         self.createTimeEntry = function() {
             self.switchMode('view');
+        }
+
+        self.cancel = function() {
+            self.switchMode('view');
+        }
+
+        self.openEndedAt = function() {
+            self.isEndedAtOpen = true;
+        }
+        self.openStartedAt = function() {
+            self.isStartedAtOpen = true;
         }
     }],
     bindings: {
