@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading hidden-sm">
         <div class="panel-title">
             <h3>{{ $ctrl.timeEntry.title }}</h3>
         </div>
@@ -20,6 +20,6 @@
         <button ng-if="$ctrl.mode == 'view'" class="btn btn-primary" ng-click="$ctrl.editTimeEntry()">Edit</button>
         <button ng-if="$ctrl.mode == 'edit'" class="btn btn-success" ng-click="$ctrl.saveTimeEntry()">Save</button>
         <button ng-if="$ctrl.mode == 'create'" class="btn btn-success" ng-click="$ctrl.createTimeEntry()">Create</button>
-        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-default">Cancel</button>
     </div>
 </div>
