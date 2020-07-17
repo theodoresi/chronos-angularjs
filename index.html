@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="./node_modules/bootstrap3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./node_modules/bootstrap3/fonts/glyphicons-halflings-regular.woff2">
     <link rel="stylesheet" href="./styles/darkly-bootstrap.min.css">
+    
+    <!-- Use the following can solve the issue -->
+    <!-- TODO: is there a better way? -->
+    <!-- GET http://localhost:5500/fonts/glyphicons-halflings-regular.woff2 net::ERR_ABORTED 404 (Not Found) -->
+    <!-- <link rel="stylesheet" href="./node_modules/bootstrap3/dist/css/darkly-bootstrap.min.css"> -->
     <title>Chronos</title>
     
 </head>
@@ -21,11 +26,13 @@
     </nav>
 
     <div ng-view></div>
-
+    
+    <!-- Libs -->
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./node_modules/angular-route/angular-route.js"></script>
     <script src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-    
+
+    <!-- App -->
     <script src="./chronos.module.js"></script>
     <script src="./chronos.config.js"></script>
     <script src="./chronos.service.js"></script>

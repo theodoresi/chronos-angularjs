@@ -18,7 +18,6 @@ chronosApp.component('timeEntryDetail', {
 
         self.saveTimeEntry = function() {
             self.switchMode('view');
-            
         }
 
         self.createTimeEntry = function() {
