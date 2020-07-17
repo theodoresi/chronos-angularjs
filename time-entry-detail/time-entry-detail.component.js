@@ -7,6 +7,8 @@ chronosApp.component('timeEntryDetail', {
         let self = this;
         self.isStartedAtOpen = false;
         self.isEndedAtOpen = false;
+        // Only set to true in create mode after a time entry is created
+        self.isCreated = false;
 
         self.switchMode = function(newMode) {
             self.mode = newMode;
@@ -21,6 +23,7 @@ chronosApp.component('timeEntryDetail', {
         }
 
         self.createTimeEntry = function() {
+            self.isCreated = true;
             self.switchMode('view');
         }
 
